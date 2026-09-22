@@ -3,6 +3,7 @@ using System;
 using MarketPulse.Api.Modules.Tenancy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPulse.Api.Migrations
 {
     [DbContext(typeof(MarketPulseDbContext))]
-    partial class MarketPulseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260921134029_AddCampaignTenantIsolation")]
+    partial class AddCampaignTenantIsolation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
