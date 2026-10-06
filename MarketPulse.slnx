@@ -2,4 +2,5 @@
   <Project Path="MarketPulse.Api/MarketPulse.Api.csproj" />
   <Project Path="MarketPulse.Client/MarketPulse.Client.csproj" />
   <Project Path="MarketPulse.Shared/MarketPulse.Shared.csproj" />
+  <Project Path="MarketPulse.Tests/MarketPulse.Tests.csproj" />
 </Solution>

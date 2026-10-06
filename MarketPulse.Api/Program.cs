@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MarketPulse.Api.Modules.Tenancy;
+using MarketPulse.Api.Modules.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddScoped<TenantContext>();
 
 builder.Services.AddScoped<ITenantContext>(sp =>
     sp.GetRequiredService<TenantContext>());
+builder.Services.AddScoped<IPasswordService, PasswordService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
