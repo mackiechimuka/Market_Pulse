@@ -18,6 +18,8 @@ builder.Services.AddScoped<TenantContext>();
 builder.Services.AddScoped<ITenantContext>(sp =>
     sp.GetRequiredService<TenantContext>());
 builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<IEmailVerificationService, EmailVerificationService>();
+builder.Services.AddScoped<IEmailSender, DevelopmentEmailSender>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,3 +44,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

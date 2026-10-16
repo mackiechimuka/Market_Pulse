@@ -50,6 +50,30 @@ namespace MarketPulse.Api.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+               
+migrationBuilder.Sql("""
+    INSERT INTO "Users"
+        ("Id", "Email", "PasswordHash", "EmailVerified", "IsActive", "CreatedAtUtc")
+    SELECT
+        o."OwnerUserId",
+        CASE lower(MIN(o."Slug"))
+            WHEN 'acme' THEN 'owner@acme.local'
+            WHEN 'zimtech' THEN 'owner@zimtech.local'
+            ELSE 'owner+' || lower(MIN(o."Slug")) || '@marketpulse.local'
+        END,
+        NULL,
+        1,
+        1,
+        CURRENT_TIMESTAMP
+    FROM "Organizations" AS o
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM "Users" AS u
+        WHERE u."Id" = o."OwnerUserId"
+    )
+    GROUP BY o."OwnerUserId";
+    """);
+
 
             migrationBuilder.CreateTable(
                 name: "EmailVerificationTokens",
